@@ -26,6 +26,7 @@ app.use(cors());
 app.use(xss());
 
 // routes
+app.use(express.static("public"));
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/jobs", authenticateUser, jobsRouter);
 app.use(notFoundMiddleware);
@@ -37,7 +38,7 @@ const start = async () => {
   try {
     await connectDB(process.env.MONGO_URI);
     app.listen(port, () =>
-      console.log(`Server is listening on port ${port}...`),
+      console.log(`Server is listening on port ${port}...`)
     );
   } catch (error) {
     console.log(error);
